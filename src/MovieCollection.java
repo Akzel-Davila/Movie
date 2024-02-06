@@ -2,7 +2,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.Collections;
 
 public class MovieCollection
 {
@@ -164,7 +166,35 @@ public class MovieCollection
 
     private void searchCast()
     {
+        System.out.print("Enter an actor search term: ");
+        String searchActor = scanner.nextLine();
 
+        ArrayList <String> actors = new ArrayList<String>();
+        ArrayList<String> display = new ArrayList<String>();
+        for (int i = 0; i<movies.size(); i++)
+        {
+            String[] tempActors = movies.get(i).getCast().split("\\|");
+
+            for (int j = 0; j<tempActors.length; j++)
+            {
+                if (!actors.contains(tempActors[j]))
+                    actors.add(tempActors[j]);
+            }
+        }
+        for (String actor: actors)
+        {
+            if (actor.toLowerCase().contains(searchActor.toLowerCase()))
+                display.add(actor);
+        }
+        Collections.sort(display);
+        for (int i = 0; i < display.size(); i++)
+        {
+            System.out.println(i+1 + ". " + display.get(i));
+        }
+        System.out.print("Which cast member would you like to learn more about? \nEnter Number:");
+        String searchNum = scanner.nextLine();
+        int num = Integer.parseInt(searchNum);
+        ArrayList<Movie> appearedIn = new ArrayList<Movie>();
     }
 
     private void searchKeywords()
