@@ -284,14 +284,42 @@ public class MovieCollection
         scanner.nextLine();
     }
 
-    private void listHighestRated()
-    {
-
-    }
-
     private void listHighestRevenue()
     {
+        for (int i = 0; i < 50; i++)
+        {
+            System.out.println(i+1 + ". "+ movies.get(i).getTitle()  +  ": $" + movies.get(i).getRevenue());
+        }
+    }
 
+    private void listHighestRated()
+    {
+        ArrayList <Movie> ratings = new ArrayList<Movie>();
+        double min  = 0;
+        int lowest = 0;
+        for (int i = 0; i < movies.size(); i++)
+        {
+            Movie film = movies.get(i);
+            if (i<50)
+                ratings.add(film);
+            else{
+                for(int j = 0; j < ratings.size(); j++)
+                {
+                    if (j == 0)
+                        min = ratings.get(j).getUserRating();
+                    if (ratings.get(j).getUserRating()< min) {
+                        min = ratings.get(j).getUserRating();
+                        lowest  = j;
+                    }
+                }
+                if (film.getUserRating()>min){
+                    ratings.set(lowest, film);
+                }
+            }
+        }
+        for (int i = 0; i< ratings.size(); i++){
+            System.out.println(i+1 + ". " + ratings.get(i).getTitle() + ": " + ratings.get(i).getUserRating());
+        }
     }
 
     private void importMovieList(String fileName)
